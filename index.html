@@ -3,88 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>String Operations</title>
+    <title>JavaScript Programs</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
-            background-color: #f9f9f9;
+            background-color: #f4f4f9;
         }
         .container {
-            border: 1px solid #ccc;
-            padding: 20px;
-            width: 500px;
+            margin-top: 20px;
+            width: 80%;
+            max-width: 600px;
             background-color: white;
+            padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        input {
+        button {
+            margin: 10px 0;
             width: 100%;
             padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            width: 48%;
-            padding: 10px;
             font-size: 16px;
+            background-color: #5cb85c;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
-        .reset {
-            background-color: #337ab7;
+        button:hover {
+            background-color: #4cae4c;
         }
-        .calculate {
-            background-color: #5cb85c;
-        }
-        .result {
-            margin-top: 20px;
-            border-top: 1px solid #ddd;
-            padding-top: 10px;
-            color: brown;
-            font-weight: bold;
+        input {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h3>Enter Strings</h3>
-        <input type="text" id="string1" placeholder="Enter String 1">
-        <input type="text" id="string2" placeholder="Enter String 2">
-        <input type="text" id="string3" placeholder="Enter String 3">
-        <div style="display: flex; justify-content: space-between;">
-            <button class="reset" onclick="resetFields()">Reset</button>
-            <button class="calculate" onclick="calculateResult()">Calculate</button>
-        </div>
-        <div class="result" id="result">Result: Operation type, String 1, 2, and 3, and result</div>
+        <h2>JavaScript Programs</h2>
+        
+        <button onclick="findTenthChar()">1. Find 10th Character</button>
+        <button onclick="findLastElement()">2. Find Last Element</button>
+        <label>3. Input Field for 10 Digits Only</label>
+        <input type="text" id="tenDigitInput" oninput="validateTenDigitInput()" placeholder="Enter 10 digits here">
+        <button onclick="findWordAndRepeatedCharacters()">4. Find Word and Repeated Characters</button>
+        <button onclick="countVowels()">5. Count Vowels in Array</button>
+        <button onclick="findLongestWord()">6. Find Longest Word</button>
+        <button onclick="toggleCase()">7. Toggle Case</button>
+        <button onclick="findWordLocation()">8. Find Word Location</button>
+        <button onclick="useSplice()">9. Use Splice (Delete/Insert/Replace)</button>
+        <button onclick="countStringDetails()">10. Count Words, Characters, Spaces, and Symbols</button>
     </div>
 
     <script>
-        function resetFields() {
-            document.getElementById('string1').value = '';
-            document.getElementById('string2').value = '';
-            document.getElementById('string3').value = '';
-            document.getElementById('result').innerText = 'Result: Operation type, String 1, 2, and 3, and result';
+        // 1. Find 10th Character
+        function findTenthChar() {
+            let inputArray = prompt("Enter characters separated by commas:").split(',');
+            if (inputArray.length >= 10) {
+                alert("The 10th character is: " + inputArray[9]);
+            } else {
+                alert("Array doesn't have 10 characters.");
+            }
         }
 
-        function calculateResult() {
-            const string1 = document.getElementById('string1').value;
-            const string2 = document.getElementById('string2').value;
-            const string3 = document.getElementById('string3').value;
+        // 2. Find Last Element
+        function findLastElement() {
+            let inputArray = prompt("Enter elements separated by commas:").split(',');
+            let lastElement = inputArray[inputArray.length - 1];
+            alert("The last element is: " + lastElement);
+        }
 
-            // Example operation: concatenate strings with a random operation name
-            const operationType = 'Concatenation';
-            const result = string1 + ' ' + string2 + ' ' + string3;
+        // 3. Allow Only 10 Digits in Text Field
+        function validateTenDigitInput() {
+            let input = document.getElementById('tenDigitInput');
+            input.value = input.value.replace(/\D/g, '').slice(0, 10);
+        }
 
-            document.getElementById('result').innerText = 
-                `Result: ${operationType}, ${string1}, ${string2}, ${string3}, and ${result}`;
+        // 4. Find Word and Repeated Characters
+        function findWordAndRepeatedCharacters() {
+            let inputArray = prompt("Enter words separated by spaces:").split(' ');
+            let wordToSearch = prompt("Enter the word to search:");
+            let wordCount = 0;
+
+            inputArray.forEach(word => {
+                if (word === wordToSearch) wordCount++;
+            });
+
+            let repeatedChars = wordToSearch.split('').filter((char, index, arr) => arr.indexOf(char) !== index);
+            alert(`Word '${wordToSearch}' occurred ${wordCount} times.\nRepeated characters: ${[...new Set(repeatedChars)]}`);
+        }
+
+        // 5. Count Vowels in Array
+        function countVowels() {
+            let inputArray = prompt("Enter characters separated by commas:").split(',');
+            let vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'];
+            let vowelCount = inputArray.filter(char => vowels.includes(char)).length;
+            alert("Number of vowels: " + vowelCount);
+        }
+
+        // 6. Find Longest Word
+        function findLongestWord() {
+            let inputString = prompt("Enter a sentence:");
+            let words = inputString.split(' ');
+            let longestWord = words.reduce((a, b) => (a.length > b.length) ? a : b);
+            alert("The longest word is: " + longestWord);
+        }
+
+        // 7. Toggle Case
+        function toggleCase() {
+            let inputString = prompt("Enter a string:");
+            let convertedString = inputString.split('')
+                .map(char => (char === char.toUpperCase()) ? char.toLowerCase() : char.toUpperCase())
+                .join('');
+            alert("Converted string: " + convertedString);
+        }
+
+        // 8. Find Word Location
+        function findWordLocation() {
+            let inputString = prompt("Enter a sentence:");
+            let searchWord = prompt("Enter the word to search:");
+            let position = inputString.split(' ').indexOf(searchWord);
+            if (position !== -1) {
+                alert(`The word '${searchWord}' is located at position ${position + 1}.`);
+            } else {
+                alert("Word not found.");
+            }
+        }
+
+        // 9. Use Splice
+        function useSplice() {
+            let inputArray = prompt("Enter array elements separated by commas:").split(',');
+            inputArray.splice(2, 1); // Delete element at index 2
+            inputArray.splice(1, 0, "NewElement"); // Insert at index 1
+            inputArray.splice(0, 1, "ReplacedElement"); // Replace at index 0
+            alert("Updated array: " + inputArray.join(', '));
+        }
+
+        // 10. Count Words, Characters, Spaces, and Special Symbols
+        function countStringDetails() {
+            let inputString = prompt("Enter a string:");
+            let wordCount = inputString.split(/\s+/).filter(word => word).length;
+            let charCount = inputString.replace(/\s/g, '').length;
+            let spaceCount = (inputString.match(/\s/g) || []).length;
+            let specialCharCount = (inputString.match(/[^a-zA-Z0-9\s]/g) || []).length;
+            alert(`Words: ${wordCount}\nCharacters: ${charCount}\nSpaces: ${spaceCount}\nSpecial Characters: ${specialCharCount}`);
         }
     </script>
 </body>
