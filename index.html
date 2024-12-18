@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Operations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+        .container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 500px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 48%;
+            padding: 10px;
+            font-size: 16px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .reset {
+            background-color: #337ab7;
+        }
+        .calculate {
+            background-color: #5cb85c;
+        }
+        .result {
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            color: brown;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Enter Strings</h3>
+        <input type="text" id="string1" placeholder="Enter String 1">
+        <input type="text" id="string2" placeholder="Enter String 2">
+        <input type="text" id="string3" placeholder="Enter String 3">
+        <div style="display: flex; justify-content: space-between;">
+            <button class="reset" onclick="resetFields()">Reset</button>
+            <button class="calculate" onclick="calculateResult()">Calculate</button>
+        </div>
+        <div class="result" id="result">Result: Operation type, String 1, 2, and 3, and result</div>
+    </div>
+
+    <script>
+        function resetFields() {
+            document.getElementById('string1').value = '';
+            document.getElementById('string2').value = '';
+            document.getElementById('string3').value = '';
+            document.getElementById('result').innerText = 'Result: Operation type, String 1, 2, and 3, and result';
+        }
+
+        function calculateResult() {
+            const string1 = document.getElementById('string1').value;
+            const string2 = document.getElementById('string2').value;
+            const string3 = document.getElementById('string3').value;
+
+            // Example operation: concatenate strings with a random operation name
+            const operationType = 'Concatenation';
+            const result = string1 + ' ' + string2 + ' ' + string3;
+
+            document.getElementById('result').innerText = 
+                `Result: ${operationType}, ${string1}, ${string2}, ${string3}, and ${result}`;
+        }
+    </script>
+</body>
+</html>
